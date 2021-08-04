@@ -1,0 +1,36 @@
+Package: mobilemeasr
+Title: Tools to Perform Data Analysis on Mobile Measurements
+Version: 0.0.1
+Date: 2021-08-04
+Authors@R: 
+    person(given = "Shona",
+           family = "Wilde",
+           role = c("aut", "cre"),
+           email = "shona.wilde@york.ac.uk",
+           comment = c(ORCID = "0000-0002-0429-4347"))
+Maintainer: Shona Wilde <shona.wilde@york.ac.uk>
+Description: A collection functions to apply a statistical framework to mobile data.
+License: GPL (>= 3)
+Depends:
+    R (>= 3.2.0),
+    dplyr (>= 1.0.1),
+Imports:
+	purrr,
+    readr,
+    tibble,
+    tidyr,
+    magrittr, 
+    stats,
+    utils,
+    ggplot2 (>= 3.3.2),
+    tidyselect,
+    rlang,
+	slider,
+	lmodel2
+Remotes:
+    github::shonawilde/shonarrr,
+	github::skgrange/threadr
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
