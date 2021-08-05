@@ -1,0 +1,29 @@
+#' Function to calculate the length of the hypotenuse in a triangle
+#'
+#' @param x Horizontal side of triangle.
+#' 
+#' @param y Vertical side of triangle.
+#' 
+#' @return Value.
+#' 
+#' @author Shona Wilde
+#' 
+#' @export
+
+
+calculate_hypotenuse_length <- function(x, y) {
+  
+  sides <- c(x, y)
+  
+  if(any(sides < 0))  {
+    stop("x and y must be positive...", call. = FALSE)
+  } 
+  
+  else if(!is.numeric(x = sides))  {
+    stop("x and y must be numeric...", call. = FALSE)
+  } 
+  
+  else{
+    sqrt(x^2 + y^2)
+  }
+}
