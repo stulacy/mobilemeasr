@@ -103,7 +103,10 @@ do_run_regression <- function(df, formula, n = 5, complete = T, method = "SMA", 
     rename(y = !!y,
            x = !!x) %>%
     tidyr::unnest(model_stats) %>%
-    filter(method == !!method) %>%
+    filter(
+      method == !!method,
+      !is.na(slope)
+    ) %>%
     select(
       window_id,
       x,
@@ -128,11 +131,17 @@ do_run_regression <- function(df, formula, n = 5, complete = T, method = "SMA", 
       model_stats = map(model_stats, as_tibble)
     )
 
-  # overwrite model stats column
-  df_model_stats$model_stats <- df_lengths$model_stats
+  # join back on to observations
+  df_join <- df_lengths %>%
+    left_join(
+      df_model_stats %>%
+        select(-model_stats),
+      by = "window_id"
+    ) %>%
+    relocate(model_stats, .after = model)
 
 
-  return(df_model_stats)
+  return(df_join)
 
 
 }
