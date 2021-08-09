@@ -4,12 +4,14 @@
 \alias{calculate_hypotenuse_length}
 \title{Function to calculate the length of the hypotenuse in a triangle}
 \usage{
-calculate_hypotenuse_length(x, y)
+calculate_hypotenuse_length(x, y, verbose)
 }
 \arguments{
 \item{x}{Horizontal side of triangle.}
 
 \item{y}{Vertical side of triangle.}
+
+\item{verbose}{Should messages be displayed to the user?}
 }
 \value{
 Value.

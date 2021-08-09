@@ -4,7 +4,14 @@
 \alias{calculate_regression_line_length}
 \title{Function to calculate the length of a regression line}
 \usage{
-calculate_regression_line_length(df, x, y)
+calculate_regression_line_length(
+  df,
+  x,
+  y,
+  slope = "slope",
+  intercept = "intercept",
+  verbose
+)
 }
 \arguments{
 \item{df}{Input data frame. Must contain a slope variable.}
@@ -12,6 +19,12 @@ calculate_regression_line_length(df, x, y)
 \item{x}{x variable for regression.}
 
 \item{y}{y variable for regression.}
+
+\item{slope}{Slope of regression line for which to calculate the length.}
+
+\item{intercept}{Intercept of regression line for which to calculate the length.}
+
+\item{verbose}{Should messages be displayed to the user?}
 }
 \value{
 Tibble.

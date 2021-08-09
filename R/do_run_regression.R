@@ -93,7 +93,7 @@ do_run_regression <- function(df, formula, n = 5, complete = T, method = "SMA", 
   model_stats_names <- names(df_model_stats$model_stats[[1]])
 
   # some tidying and calculate lengths of regression line and add this to model stats df
-  df_lengths <- df_model_stats %>%
+  df_unnest <- df_model_stats %>%
     select(
       window_id,
       observations,
@@ -103,18 +103,21 @@ do_run_regression <- function(df, formula, n = 5, complete = T, method = "SMA", 
     rename(y = !!y,
            x = !!x) %>%
     tidyr::unnest(model_stats) %>%
+    mutate(slope = ifelse(window_id == 5, NA, slope)) %>%
     filter(
-      method == !!method,
-      !is.na(slope)
+      method == !!method
     ) %>%
     select(
       window_id,
       x,
       y,
       everything()
-    ) %>%
+    )
+
+  # calculate regression line lengths
+  df_lengths <- df_unnest %>%
     group_by(window_id) %>%
-    calculate_regression_line_length() %>%
+    calculate_regression_line_length(verbose = verbose) %>%
     select(
       window_id,
       all_of(model_stats_names),
@@ -131,17 +134,11 @@ do_run_regression <- function(df, formula, n = 5, complete = T, method = "SMA", 
       model_stats = map(model_stats, as_tibble)
     )
 
-  # join back on to observations
-  df_join <- df_lengths %>%
-    left_join(
-      df_model_stats %>%
-        select(-model_stats),
-      by = "window_id"
-    ) %>%
-    relocate(model_stats, .after = model)
+  # overwrite model stats column
+  df_model_stats$model_stats <- df_lengths$model_stats
 
 
-  return(df_join)
+  return(df_model_stats)
 
 
 }
@@ -188,6 +185,7 @@ do_run_regression_worker <- function(data, index, formula, n, n_models, complete
   return(model)
 
 }
+
 
 
 
