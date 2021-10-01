@@ -1,4 +1,4 @@
-#' Function to perform distance-weighted quantile regression
+#' Function to perform weighted quantile regression
 #'
 #' @param data Input data.
 #'
@@ -11,8 +11,8 @@
 #' @param tau The quantile(s) to be estimated. Generally a number between 0 and 1.
 #'
 #' @param sigma Width of the Gaussian kernel smoothing function.
-#' Small \sigma leads to a narrow Gaussian and hence allows the user to focus on very localised effects, whereas
-#'  a bigger \sigma has the effect of smoothing things out.
+#' Small \eqn{\sigma} leads to a narrow Gaussian and hence allows the user to focus on very localised effects, whereas
+#'  a bigger \eqn{\sigma} has the effect of smoothing things out.
 #'
 #' @return Tibble containing model results.
 #'

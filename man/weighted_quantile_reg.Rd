@@ -2,7 +2,7 @@
 % Please edit documentation in R/weighted_quantile_reg.R
 \name{weighted_quantile_reg}
 \alias{weighted_quantile_reg}
-\title{Function to perform distance-weighted quantile regression}
+\title{Function to perform weighted quantile regression}
 \usage{
 weighted_quantile_reg(
   data,
@@ -25,14 +25,14 @@ weighted_quantile_reg(
 \item{tau}{The quantile(s) to be estimated. Generally a number between 0 and 1.}
 
 \item{sigma}{Width of the Gaussian kernel smoothing function.
-Small \sigma leads to a narrow Gaussian and hence allows the user to focus on very localised effects, whereas
-a bigger \sigma has the effect of smoothing things out.}
+Small \eqn{\sigma} leads to a narrow Gaussian and hence allows the user to focus on very localised effects, whereas
+a bigger \eqn{\sigma} has the effect of smoothing things out.}
 }
 \value{
 Tibble containing model results.
 }
 \description{
-Function to perform distance-weighted quantile regression
+Function to perform weighted quantile regression
 }
 \author{
 Shona Wilde
