@@ -23,7 +23,7 @@ tidy_lm_output <- function(model){
       p_value = pr_t,
     ) %>%
     mutate(
-      term = str_replace(coeff, "(\\(Intercept)\\)", "intercept"),
+      term = str_replace(term, "(\\(Intercept)\\)", "intercept"),
       r_squared = summary$r.squared
     )
 
