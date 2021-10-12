@@ -103,7 +103,7 @@ do_run_regression <- function(df, formula, n = 5, complete = T, method = "SMA", 
     rename(y = !!y,
            x = !!x) %>%
     tidyr::unnest(model_stats) %>%
-    mutate(slope = ifelse(window_id == 5, NA, slope)) %>%
+  #  mutate(slope = ifelse(window_id == 5, NA, slope)) %>%
     filter(
       method == !!method
     ) %>%
