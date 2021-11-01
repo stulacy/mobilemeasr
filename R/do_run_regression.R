@@ -55,7 +55,7 @@ do_run_regression <- function(df, formula, n = 5, complete = T, method = "SMA", 
 
   # print formula used for regression
   if (verbose) {
-    message(threadr::str_date_formatted(), ": Performing regression using ", y, "~", x, "...")
+    message(lubridate::now(tzone = Sys.timezone()), ": Performing regression using ", y, "~", x, "...")
   }
 
 
@@ -154,7 +154,7 @@ do_run_regression_worker <- function(data, index, formula, n, n_models, complete
   if (verbose && index%%10 == 0) {
 
     message(
-      str_date_formatted(), ": Modelling ", index,
+      lubridate::now(tzone = Sys.timezone()), ": Modelling ", index,
       " of ", n_models, " times..."
     )
   }

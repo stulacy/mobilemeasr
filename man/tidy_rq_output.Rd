@@ -4,10 +4,12 @@
 \alias{tidy_rq_output}
 \title{Function to summarise the output from \code{\link[quantreg]{rq}} in a tidy format}
 \usage{
-tidy_rq_output(model)
+tidy_rq_output(model, se = NULL)
 }
 \arguments{
 \item{model}{Model object to summarise.}
+
+\item{se}{Method to use for calculating standard errors. One of NULL, "nid", "rank", "iid", "ker", or "boot".}
 }
 \value{
 Tibble containing model results.
