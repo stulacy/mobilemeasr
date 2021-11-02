@@ -7,6 +7,7 @@
 leaflet_plot_coloured(
   st,
   colour_by = "value",
+  palette = "plasma",
   popup = NULL,
   opacity = 0.5,
   fill_opacity = 0.2
@@ -16,6 +17,8 @@ leaflet_plot_coloured(
 \item{st}{Object with class \code{sf} or \code{sfc}.}
 
 \item{colour_by}{Variable to colour geometries by.}
+
+\item{palette}{Colours that values will be mapped to.}
 
 \item{popup}{Vector of variables to be used as a pop-up on the map.}
 
@@ -31,7 +34,7 @@ This function is a wrapper around \code{\link[gissr]{leaflet_plot}} that allows 
 Discrete and continuous scales are supported.
 }
 \seealso{
-\code{\link[gissr]{leaflet_plot}}
+\code{\link[gissr]{leaflet_plot}}, \code{\link[leaflet]{colorNumeric}}#'
 }
 \author{
 Shona Wilde

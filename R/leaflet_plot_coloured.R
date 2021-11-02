@@ -7,6 +7,8 @@
 #'
 #' @param colour_by Variable to colour geometries by.
 #'
+#' @param palette Colours that values will be mapped to.
+#'
 #' @param popup Vector of variables to be used as a pop-up on the map.
 #'
 #' @param opacity Stroke opacity (edge of geometry).
@@ -17,12 +19,11 @@
 #'
 #' @author Shona Wilde
 #'
-#' @seealso \code{\link[gissr]{leaflet_plot}}
+#' @seealso \code{\link[gissr]{leaflet_plot}}, \code{\link[leaflet]{colorNumeric}}
 #'
 #' @export
 
-
-leaflet_plot_coloured <- function(st, colour_by = "value",  popup = NULL, opacity = 0.5, fill_opacity = 0.2) {
+leaflet_plot_coloured <- function(st, colour_by = "value", palette = "plasma", popup = NULL, opacity = 0.5, fill_opacity = 0.2) {
 
 
   colour_var <- sym(colour_by)
@@ -36,7 +37,7 @@ leaflet_plot_coloured <- function(st, colour_by = "value",  popup = NULL, opacit
 
   {
     pal <- colorNumeric(
-      palette = "plasma",
+      palette = palette,
       domain = domain
     )
 
@@ -45,7 +46,7 @@ leaflet_plot_coloured <- function(st, colour_by = "value",  popup = NULL, opacit
   else {
 
     pal <- colorFactor(
-      "plasma",
+      palette = palette,
       domain = domain,
       na.color = "black"
     )
