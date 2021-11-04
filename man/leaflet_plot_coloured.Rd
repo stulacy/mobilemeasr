@@ -34,7 +34,7 @@ This function is a wrapper around \code{\link[gissr]{leaflet_plot}} that allows 
 Discrete and continuous scales are supported.
 }
 \seealso{
-\code{\link[gissr]{leaflet_plot}}, \code{\link[leaflet]{colorNumeric}}#'
+\code{\link[gissr]{leaflet_plot}}, \code{\link[leaflet]{colorNumeric}}
 }
 \author{
 Shona Wilde
