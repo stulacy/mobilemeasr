@@ -33,12 +33,16 @@ st_make_tidygraph <- function(st, directed = F) {
     )
   
   # give nodes a unique ID
-  st_nodes <- st_nodes %>%
-    mutate(
-      xy = str_c(X, Y, sep = " "),
-      node_id = group_indices(., factor(xy, levels = unique(xy)))
-    ) %>% 
-    select(-xy)
+  suppressWarnings(
+    
+    st_nodes <- st_nodes %>%
+      mutate(
+        xy = str_c(X, Y, sep = " "),
+        node_id = group_indices(., factor(xy, levels = unique(xy)))
+      ) %>% 
+      select(-xy)
+    
+  )
   
   # get start and end nodes
   source_nodes <- st_nodes %>%
