@@ -16,6 +16,20 @@
 
 st_make_tidygraph <- function(st, directed = F) {
   
+  # check class
+  stopifnot(
+    "Object class must be `sf`" = 
+      inherits(st,"sf") 
+  )
+  
+  # check geometry type
+  if (any(!st_geometry_type(st) %in% "LINESTRING")) {
+    stop("Geometry must be of type 'LINESTRING'...",
+         call. = FALSE)
+  }
+  
+  
+  # assign edge ID
   st_edges <- st %>% 
     mutate(edge_id = c(1:n()))
   
@@ -74,7 +88,12 @@ st_make_tidygraph <- function(st, directed = F) {
     directed = directed
   ) 
   
-  return(st_graph)
+  # how many edges connected to each node?
+  st_graph_degree <- st_graph %>%
+    activate(nodes) %>%
+    mutate(degree = centrality_degree())
+  
+  return(st_graph_degree)
   
   
 }
