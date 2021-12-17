@@ -11,7 +11,7 @@ st_points_to_lines(st, group_by = NA, do_union = F)
 
 \item{group_by}{Optional grouping variable}
 
-\item{do_union}{should geometries be created by unioning using st_union, or simply by combining using st_combine?}
+\item{do_union}{Should geometries be created by unioning using st_union, or simply by combining using st_combine?}
 }
 \value{
 Sf object with LINESTRING geometries
