@@ -36,7 +36,7 @@ leaflet_plot_coloured <- function(st, colour_by = "value", palette = "plasma", p
   if (class(domain) %in% c("integer", "numeric"))
 
   {
-    pal <- colorNumeric(
+    pal <- leaflet::colorNumeric(
       palette = palette,
       domain = domain
     )
@@ -45,7 +45,7 @@ leaflet_plot_coloured <- function(st, colour_by = "value", palette = "plasma", p
 
   else {
 
-    pal <- colorFactor(
+    pal <- leaflet::colorFactor(
       palette = palette,
       domain = domain,
       na.color = "black"
@@ -61,7 +61,7 @@ leaflet_plot_coloured <- function(st, colour_by = "value", palette = "plasma", p
     popup = popup,
     opacity = opacity
   )  %>%
-    addLegend(
+    leaflet::addLegend(
       "bottomright",
       pal = pal,
       values = ~domain,

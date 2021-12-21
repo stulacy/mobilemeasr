@@ -120,7 +120,7 @@ st_weighted_quantile_regression_worker <- function(st,
   # calculate weights
   weights <- exp(-(abs(distance - 0)) ^ 2/(2 * sigma ^ 2)) / (sigma * sqrt(2 * pi))
 
-  weights_norm <- normalise(weights)
+  weights_norm <- shonarrr::normalise(weights)
 
   st$weights <- weights_norm
 

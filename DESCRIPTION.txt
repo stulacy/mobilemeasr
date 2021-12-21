@@ -14,8 +14,10 @@ License: GPL (>= 3)
 Depends:
     R (>= 3.2.0),
     dplyr (>= 1.0.1),
+sf
 Imports:
 	purrr,
+sf,
     readr,
     tibble,
     tidyr,
@@ -26,7 +28,8 @@ Imports:
     tidyselect,
     rlang,
 	slider,
-	lmodel2
+	lmodel2,
+tidygraph
 Remotes:
     github::shonawilde/shonarrr,
 	github::skgrange/threadr
