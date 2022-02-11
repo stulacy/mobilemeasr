@@ -2,7 +2,7 @@
 % Please edit documentation in R/st_get_boundary.R
 \name{st_get_boundary}
 \alias{st_get_boundary}
-\title{Function to return bounding box of spatial geometries}
+\title{Function to return bounding box of spatial geometries in a spatial data frame}
 \usage{
 st_get_boundary(st, group_by, buffer = 0, crs = 4326)
 }
@@ -19,7 +19,7 @@ st_get_boundary(st, group_by, buffer = 0, crs = 4326)
 An object of the same class as \code{st}, with manipulated geometry.
 }
 \description{
-Function to return bounding box of spatial geometries
+Function to return bounding box of spatial geometries in a spatial data frame
 }
 \author{
 Shona Wilde

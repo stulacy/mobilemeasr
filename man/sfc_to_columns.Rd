@@ -4,7 +4,7 @@
 \alias{sfc_to_columns}
 \title{Function to extract geometry coordinates as columns}
 \usage{
-sfc_to_columns(data, names = c("longitude", "latitude"), drop_geometry = FALSE)
+sfc_to_columns(data, names = c("long", "lat"), drop_geometry = FALSE)
 }
 \arguments{
 \item{data}{Data with class \code{sf} or \code{sfc}}

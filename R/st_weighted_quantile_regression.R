@@ -175,7 +175,7 @@ st_weighted_quantile_regression_worker <- function(st,
   #
   #   }
 
-  )
+  #)
 
   results <- tryCatch(
     {
