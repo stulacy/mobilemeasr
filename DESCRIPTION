@@ -14,10 +14,9 @@ License: GPL (>= 3)
 Depends:
     R (>= 3.2.0),
     dplyr (>= 1.0.1),
-sf
+    sf
 Imports:
-	purrr,
-sf,
+    purrr,
     readr,
     tibble,
     tidyr,
@@ -27,12 +26,12 @@ sf,
     ggplot2 (>= 3.3.2),
     tidyselect,
     rlang,
-	slider,
-	lmodel2,
-tidygraph
+    slider,
+    lmodel2,
+    tidygraph
 Remotes:
     github::shonawilde/shonarrr,
-	github::skgrange/threadr
+    github::skgrange/threadr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

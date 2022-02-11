@@ -140,35 +140,65 @@ st_weighted_quantile_regression_worker <- function(st,
 
 
   # build tibble
-  # build tibble
+  # results <- tryCatch(
+  #   {
+  #     broom::tidy(model) %>%
+  #       janitor::clean_names() %>%
+  #       rename(
+  #         quantile = tau,
+  #         value = estimate
+  #       ) %>%
+  #       mutate(
+  #         lat = lat,
+  #         long = long,
+  #         sigma = sigma,
+  #         formula = format(formula),
+  #         term = str_replace(term, "(\\(Intercept)\\)", "intercept"),
+  #         quantile_name = paste0("Q", quantile*100)
+  #       ) %>%
+  #       select(
+  #         lat,
+  #         long,
+  #         term,
+  #         formula,
+  #         value,
+  #         quantile,
+  #         quantile_name,
+  #         conf_low,
+  #         conf_high,
+  #         sigma
+  #       )
+  #   },
+  #   error = function(e) {
+  #     print(e)
+  #     return(tibble())
+  #
+  #   }
+
+  )
+
   results <- tryCatch(
     {
-      broom::tidy(model) %>%
-        janitor::clean_names() %>%
-        rename(
-          quantile = tau,
-          value = estimate
-        ) %>%
-        mutate(
-          lat = lat,
-          long = long,
-          sigma = sigma,
-          formula = format(formula),
-          term = str_replace(term, "(\\(Intercept)\\)", "intercept"),
-          quantile_name = paste0("Q", quantile*100)
-        ) %>%
-        select(
-          lat,
-          long,
-          term,
-          formula,
-          value,
-          quantile,
-          quantile_name,
-          conf_low,
-          conf_high,
-          sigma
-        )
+    tidy_rq_output(model, se = se) %>%
+    mutate(
+      lat = lat,
+      long = long,
+      sigma = sigma,
+      formula = format(formula)
+    ) %>%
+    select(
+      lat,
+      long,
+      term,
+      formula,
+      value,
+      quantile,
+      quantile_name,
+      std_error,
+      sigma,
+      p_value,
+      t_value
+    )
     },
     error = function(e) {
       print(e)
@@ -177,37 +207,6 @@ st_weighted_quantile_regression_worker <- function(st,
     }
 
   )
-
-  # results <- tryCatch(
-  #   {
-  #   tidy_rq_output(model, se = se) %>%
-  #   mutate(
-  #     lat = lat,
-  #     long = long,
-  #     sigma = sigma,
-  #     formula = format(formula)
-  #   ) %>%
-  #   select(
-  #     lat,
-  #     long,
-  #     term,
-  #     formula,
-  #     value,
-  #     quantile,
-  #     quantile_name,
-  #     std_error,
-  #     sigma,
-  #     p_value,
-  #     t_value
-  #   )
-  #   },
-  #   error = function(e) {
-  #     print(e)
-  #     return(tibble())
-  #
-  #   }
-  #
-  # )
 
   return(results)
 

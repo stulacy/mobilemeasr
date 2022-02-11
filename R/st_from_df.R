@@ -14,7 +14,7 @@
 #'
 #' @export
 
-st_from_df <- function(df, latitude = "latitude", longitude = "longitude", crs = 4326){
+st_from_df <- function(df, latitude = "lat", longitude = "long", crs = 4326){
 
 
   if (any(is.na(c(df[, latitude, drop = T], df[, longitude, drop = T]))))
