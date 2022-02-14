@@ -14,15 +14,17 @@
 #'
 #' @export
 
-st_points_to_lines <- function(st, group_by = NA, do_union = F) {
 
 
-  if(!is.na(group_by)) {
+st_points_to_lines <- function(st, group_by = NULL, do_union = F) {
 
-    group_by <- sym(group_by)
+
+  if(length(group_by) > 0) {
+
+    group_vars <- syms(group_by)
 
     st_lines <- st %>%
-      group_by(!!group_by) %>%
+      group_by(!!!group_vars) %>%
       summarise(do_union = do_union) %>%
       sf::st_cast("LINESTRING")
 
