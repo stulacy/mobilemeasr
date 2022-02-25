@@ -4,7 +4,7 @@
 \alias{st_points_to_lines}
 \title{St points to lines}
 \usage{
-st_points_to_lines(st, group_by = NA, do_union = F)
+st_points_to_lines(st, group_by = NULL, do_union = F)
 }
 \arguments{
 \item{st}{Object with class \code{sf} or \code{sfc}. The geometry type must be 'POINTS'}

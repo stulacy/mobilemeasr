@@ -78,7 +78,7 @@ st_weighted_quantile_regression_worker <- function(st,
 
 
   # Display message for every 10th model
-  if (verbose && index%%10 == 0) {
+  if (verbose && index%%100== 0) {
 
     message(
       lubridate::now(tz = Sys.timezone()),
@@ -93,10 +93,10 @@ st_weighted_quantile_regression_worker <- function(st,
     sfc_to_columns(drop_geometry = T)
 
   lat <- df_geometry %>%
-    pull(latitude)
+    pull(lat)
 
   long <- df_geometry %>%
-    pull(longitude)
+    pull(long)
 
   # calculate distance to each observation
   distance <- st_distance(
