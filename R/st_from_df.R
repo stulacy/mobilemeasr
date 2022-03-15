@@ -14,6 +14,8 @@
 #'
 #' @export
 
+
+
 st_from_df <- function(df, latitude = "lat", longitude = "long", crs = 4326){
 
 
@@ -21,23 +23,26 @@ st_from_df <- function(df, latitude = "lat", longitude = "long", crs = 4326){
 
   {
 
-    df <- df %>%
-      filter(
-        across(c(!!latitude, !!longitude),
-               ~ !is.na(.x)
-        )
-      )
+    # df <- df %>%
+    #   filter(
+    #     across(c(!!latitude, !!longitude),
+    #            ~ !is.na(.x)
+    #     )
+    #   )
 
-    warning("Missing values in coordinates detected and have been removed...",
+    warning("Missing values in coordinates detected...",
             call. = FALSE)
 
   }
 
-  sf <- sf::st_as_sf(df,
-           coords = c(longitude, latitude),
-           crs = crs)
+  st <- sf::st_as_sf(
+    df,
+    coords = c(longitude, latitude),
+    crs = crs,
+    na.fail = F
+  )
 
-  return(sf)
+  return(st)
 
 }
 
