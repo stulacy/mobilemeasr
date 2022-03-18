@@ -2,13 +2,13 @@
 % Please edit documentation in R/st_calculate_lagged_distance.R
 \name{st_calculate_lagged_distance}
 \alias{st_calculate_lagged_distance}
-\title{Function to calculate distance between points}
+\title{Function to calculate distance between consecutive points}
 \usage{
 st_calculate_lagged_distance(
   st,
   name = "distance_from_previous",
   as_numeric = T,
-  crs = 4326
+  crs = NA
 )
 }
 \arguments{
@@ -18,13 +18,13 @@ st_calculate_lagged_distance(
 
 \item{as_numeric}{Should the new column be numeric? Default is TRUE.}
 
-\item{crs}{Projection of output. Default is to convert to \emph{WGS 84}.}
+\item{crs}{Projection of output. Default is to leave the projection of code{st} unchanged.}
 }
 \value{
 An object of the same class as \code{st}.
 }
 \description{
-Function to calculate distance between points
+Function to calculate distance between consecutive points
 }
 \author{
 Shona Wilde
