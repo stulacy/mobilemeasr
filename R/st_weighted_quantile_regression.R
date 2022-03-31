@@ -179,14 +179,16 @@ st_weighted_quantile_regression_worker <- function(st,
 
   results <- tryCatch(
     {
-    tidy_rq_output(model, se = se) %>%
+    shonarrr::tidy_rq_output(model, se = se) %>%
     mutate(
       lat = lat,
       long = long,
       sigma = sigma,
-      formula = format(formula)
+      formula = format(formula),
+      model = list(model)
     ) %>%
     select(
+      model,
       lat,
       long,
       term,

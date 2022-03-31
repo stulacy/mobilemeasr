@@ -30,7 +30,8 @@ Imports:
     lmodel2,
     tidygraph,
     janitor,
-    gissr
+    gissr,
+    shonarrr (>= 0.0.2)
 Remotes:
     github::shonawilde/shonarrr,
     github::skgrange/threadr
