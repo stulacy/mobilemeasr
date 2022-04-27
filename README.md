@@ -6,8 +6,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of mobilemeasr is to develop a modelling framework that can be
-applied to mobile data.
+The goal of mobilemeasr is to facilitate the analysis of mobile monitoring data.
 
 ## Installation
 
