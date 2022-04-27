@@ -19,8 +19,8 @@ filter_raster_by_date <- function(raster, start, end) {
 
 
   # parse dates
-  start <- start %>% as.POSIXct(tz = "UTC")
-  end <- end %>% as.POSIXct(tz = "UTC") + threadr::seconds_in_a_day()
+  start_date <- start %>% as.POSIXct(tz = "UTC")
+  end_date <- end %>% as.POSIXct(tz = "UTC") + threadr::seconds_in_a_day()
 
   # parse dates from raster
   dates <- names(raster) %>%
@@ -35,8 +35,8 @@ filter_raster_by_date <- function(raster, start, end) {
     filter(
       between(
         date,
-        start,
-        end
+        start_date,
+        end_date
       )
     ) %>%
     shonarrr::slice_min_max(index) %>%
