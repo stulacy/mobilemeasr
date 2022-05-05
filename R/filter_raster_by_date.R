@@ -19,13 +19,15 @@ filter_raster_by_date <- function(raster, start, end) {
 
 
   # parse dates
-  start_date <- start %>% as.POSIXct(tz = "UTC")
-  end_date <- end %>% as.POSIXct(tz = "UTC") + threadr::seconds_in_a_day()
+  start <- start %>% as.POSIXct(tz = "UTC")
+  end <- end %>% as.POSIXct(tz = "UTC") + threadr::seconds_in_a_day()
+
 
   # parse dates from raster
   dates <- names(raster) %>%
     str_remove("^X") %>%
     ymd_hms()
+
 
   # find index of dates needed
   date_index_range <- tibble(
@@ -35,19 +37,18 @@ filter_raster_by_date <- function(raster, start, end) {
     filter(
       between(
         date,
-        start_date,
-        end_date
+        start,
+        end
       )
     ) %>%
-    shonarrr::slice_min_max(index) %>%
+    slice_min_max(index) %>%
     pull(index)
 
   # create sequence of indexes for subsetting
   date_index_seq <- seq(date_index_range[1], date_index_range[2], 1)
 
-
   # subset raster
-  ra_filt <- subset(
+  ra_filt <- raster::subset(
     raster, date_index_seq
   )
 
