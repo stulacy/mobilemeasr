@@ -14,7 +14,7 @@ st_coords_as_point(latitude, longitude, crs = 4326)
 \item{crs}{Coordinate reference system of supplied latitude and longitude}
 }
 \value{
-\code(sf) object with POINT geometry
+\code{sf} object with POINT geometry
 }
 \description{
 Covert a coordinate pair to a point
