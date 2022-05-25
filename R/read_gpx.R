@@ -7,7 +7,7 @@
 #'
 #' @return \code{sf} data frame
 #'
-#' @autho Shona Wilde
+#' @author Shona Wilde
 #' @export
 
 
