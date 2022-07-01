@@ -65,10 +65,10 @@ do_run_regression2 <- function(df, formula, n = 5, complete = T, verbose = T) {
 
   # run models
   df_model_stats <- df_roll %>%
-    rowwise() %>% 
+    rowwise() %>%
     mutate(
       model_stats = list(
-        do_run_regression_worker(
+        do_run_regression_worker2(
           data = observations,
           formula = formula,
           n = n,
@@ -79,7 +79,7 @@ do_run_regression2 <- function(df, formula, n = 5, complete = T, verbose = T) {
         )
       )
     )
-  
+
 
   return(df_model_stats)
 
@@ -89,52 +89,52 @@ do_run_regression2 <- function(df, formula, n = 5, complete = T, verbose = T) {
 
 
 
-do_run_regression_worker <- function(data, formula, n, complete, verbose, index, n_models){
-  
+do_run_regression_worker2 <- function(data, formula, n, complete, verbose, index, n_models){
+
   # only display message for every 10th model
   if (verbose && index%%100 == 0) {
-    
+
     message(
       lubridate::now(tzone = Sys.timezone()), ": Modelling ", index,
       " of ", n_models, " times..."
     )
   }
-  
-  
+
+
   # wrap to prevent function falling over when lm encounters an error
   possible_lm <-  purrr::possibly(.f = lm, otherwise = NULL)
-  
+
   model <- suppressWarnings(
-    
+
     possible_lm(
       formula = formula,
       data = data
     )
-    
+
   )
-  
+
   # calculate model summaries
   model_stats <- lm_model_stats(model)
-  
+
   # invalidate models where window is smaller than n
   if (complete){
-    
+
     if (nrow(data) < n)
-      
+
       model_stats <- tibble()
   }
-  
-  
+
+
   return(model_stats)
-  
+
 }
 
 
 
 lm_model_stats <- function(model) {
-  
+
   suppressWarnings(
-    
+
     # build tibble
     df <- tibble(
       slope = model$coefficients[[2]],
@@ -142,10 +142,10 @@ lm_model_stats <- function(model) {
       r_squared = summary(model)$r.squared,
       p_value = summary(model)$coefficients[,"Pr(>|t|)"][2]
     )
-    
+
   )
   return(df)
-  
+
 }
 
 
