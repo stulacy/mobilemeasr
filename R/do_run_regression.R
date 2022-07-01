@@ -2,7 +2,7 @@
 #'
 #' \code{do_run_regression} calculates the regression results for fixed-width, overlapping windows of data.
 #'
-#' @param df Input data frame.
+#' @param df Input data frame or tibble.
 #'
 #' @param formula A formula specifying the model, as in \code{\link[lmodel2]{lmodel2}} and \code{\link[stats]{lm}}.
 #'

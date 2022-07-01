@@ -14,7 +14,7 @@ do_run_regression(
 )
 }
 \arguments{
-\item{df}{Input data frame.}
+\item{df}{Input data frame or tibble.}
 
 \item{formula}{A formula specifying the model, as in \code{\link[lmodel2]{lmodel2}} and \code{\link[stats]{lm}}.}
 
