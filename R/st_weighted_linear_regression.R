@@ -85,7 +85,7 @@ st_weighted_linear_regression_worker <- function(st,
   distance <- st_distance(
     location,
     st,
-    by_element = T
+    by_element = F
   ) %>%
     as.numeric()
 
@@ -126,10 +126,10 @@ st_weighted_linear_regression_worker <- function(st,
       lat = lat,
       long = long,
       sigma = sigma,
-      formula = format(formula)
+      formula = format(formula) %>% paste(collapse = " ") %>% str_squish()
     ) %>%
     select(
-      model,
+    #  model,
       lat,
       long,
       term,

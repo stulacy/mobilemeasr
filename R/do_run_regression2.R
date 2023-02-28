@@ -114,7 +114,19 @@ do_run_regression_worker2 <- function(data, formula, n, complete, verbose, index
   )
 
   # calculate model summaries
-  model_stats <- lm_model_stats(model)
+ # model_stats <- lm_model_stats(model)
+
+  model_stats <- tryCatch( {
+
+    lm_model_stats(model)
+  },
+  error = function(e) {
+
+    print(paste("MY_ERROR:  ",e))
+    return(tibble())
+
+  }
+  )
 
   # invalidate models where window is smaller than n
   if (complete){

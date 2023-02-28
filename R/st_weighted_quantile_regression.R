@@ -102,7 +102,7 @@ st_weighted_quantile_regression_worker <- function(st,
   distance <- st_distance(
     location,
     st,
-    by_element = T
+    by_element = F
   ) %>%
     as.numeric()
 
@@ -130,14 +130,28 @@ st_weighted_quantile_regression_worker <- function(st,
 
 
   # quantile regression model
-  model <- quantreg::rq(
-    formula = formula,
-    data = st_filt,
-    tau = tau,
-    weights = weights
+  # model <- quantreg::rq(
+  #   formula = formula,
+  #   data = st_filt,
+  #   tau = tau,
+  #   weights = weights
+  # )
+
+  model <- tryCatch(
+    {
+      quantreg::rq(
+        formula = formula,
+        data = st_filt,
+        tau = tau,
+        weights = weights
+      )
+    },
+    error = function(e) {
+
+      print(e)
+      return(NULL)
+    }
   )
-
-
 
   # build tibble
   # results <- tryCatch(
@@ -185,10 +199,10 @@ st_weighted_quantile_regression_worker <- function(st,
       long = long,
       sigma = sigma,
       formula = format(formula),
-      model = list(model)
+    #  model = list(model)
     ) %>%
     select(
-      model,
+     # model,
       lat,
       long,
       term,
