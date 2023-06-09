@@ -4,7 +4,13 @@
 \alias{st_from_df}
 \title{Function for promoting a data frame to an \code{sf} object}
 \usage{
-st_from_df(df, latitude = "lat", longitude = "long", crs = 4326)
+st_from_df(
+  df,
+  latitude = "lat",
+  longitude = "long",
+  remove_empty = F,
+  crs = 4326
+)
 }
 \arguments{
 \item{df}{Data frame to be converted to spatial data frame - currently only works for \code{POINTS}}
@@ -13,10 +19,12 @@ st_from_df(df, latitude = "lat", longitude = "long", crs = 4326)
 
 \item{longitude}{Longitude variable in df}
 
+\item{remove_empty}{Should rows with missing geometries be removed? Default is FALSE.}
+
 \item{crs}{Coordinate reference system of df}
 }
 \value{
-\code{sf}object
+\code{sf} object
 }
 \description{
 Function for promoting a data frame to an \code{sf} object
