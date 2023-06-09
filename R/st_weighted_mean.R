@@ -1,3 +1,24 @@
+#' Distance weighted mean
+#'
+#' Function to calculate a geographically-weighted mean
+#'
+#' @param st Object of class \code{sf} containing the data on which to perform the calculation
+#'
+#' @param location Object of class \code{sf} containing POINT geometries of locations to perform the calculation at.
+#'
+#' @param variable Name of the variable within \code{st} to use for the mean calculation.
+#'
+#' @param sigma Width of the Gaussian kernel smoothing function in m.
+#' Small \eqn{\sigma} leads to a narrow Gaussian and hence allows the user to focus on very localised effects, whereas
+#'  a bigger \eqn{\sigma} has the effect of smoothing things out.
+#'
+#' @param verbose Should a message be displayed to the user?
+#'
+#' @return Tibble.
+#'
+#' @author Shona Wilde
+#'
+#' @export
 
 st_weighted_mean <- function(st,
                              location,
@@ -25,7 +46,8 @@ st_weighted_mean <- function(st,
       verbose = verbose,
       index = .y,
       n = n
-    )
+    ),
+    .progress = T
   )
 
 

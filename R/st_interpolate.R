@@ -52,10 +52,21 @@ st_interpolate <- function(st, distance, crs = 4326) {
     st_as_sf() %>%
     st_transform(crs = crs)
 
-  # bind original data and assign points IDs
-  st_join <- st_points %>%
-    bind_cols(sp@data) %>%
-    rowid_to_column("point_id")
+  # bind original data slot if there is one
+  if ("data" %in% slotNames(sp)) {
+
+    st_join <- st_points %>%
+      bind_cols(sp@data) %>%
+      rowid_to_column("point_id")
+  }
+
+  else {
+
+    # just add points IDs
+    st_join <- st_points %>%
+      rowid_to_column("point_id")
+
+  }
 
   return(st_join)
 
