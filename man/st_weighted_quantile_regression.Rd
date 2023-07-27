@@ -2,7 +2,7 @@
 % Please edit documentation in R/st_weighted_quantile_regression.R
 \name{st_weighted_quantile_regression}
 \alias{st_weighted_quantile_regression}
-\title{Function to perform distance-weighted quantile regression}
+\title{Distance-weighted regression}
 \usage{
 st_weighted_quantile_regression(
   st,

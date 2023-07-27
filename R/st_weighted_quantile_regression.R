@@ -1,3 +1,5 @@
+#' Distance-weighted regression
+#'
 #' Function to perform distance-weighted quantile regression
 #'
 #' @param st Object of class \code{sf} containing the data on which to perform the regression.

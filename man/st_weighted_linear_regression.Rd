@@ -2,7 +2,7 @@
 % Please edit documentation in R/st_weighted_linear_regression.R
 \name{st_weighted_linear_regression}
 \alias{st_weighted_linear_regression}
-\title{Function to perform distance-weighted linear regression}
+\title{Distance-weighted regression}
 \usage{
 st_weighted_linear_regression(st, location, formula, sigma = 100, verbose = T)
 }
