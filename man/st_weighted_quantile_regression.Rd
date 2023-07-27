@@ -19,7 +19,7 @@ st_weighted_quantile_regression(
 
 \item{location}{Object of class \code{sf} containing POINT geometries of locations to perform the regression at.}
 
-\item{formula}{A formula specifying the model, as in \code{\link[quantreg]{rq}} and \code{\link[stats]{lm}}.}
+\item{formula}{A formula specifying the model, as in \code{\link[stats]{lm}} and \code{\link[quantreg]{rq}}.}
 
 \item{tau}{The quantile(s) to be estimated. Generally a number between 0 and 1.}
 

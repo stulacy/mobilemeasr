@@ -79,24 +79,18 @@ st_weighted_mean_worker <- function(st,
   }
 
 
-  # format geometry column
-  df_geometry <- location %>%
-    st_as_sf() %>%
-    sfc_to_columns(drop_geometry = T)
+  # store lat and lon
+  lat <- st_coordinates(location)[2]
+  long <- st_coordinates(location)[1]
 
-  lat <- df_geometry %>%
-    pull(lat)
-
-  long <- df_geometry %>%
-    pull(long)
+  # locations in df as matrix
+  coords <- st_coordinates(st)
 
   # calculate distance to each observation
-  distance <- st_distance(
-    location,
-    st,
-    by_element = F
-  ) %>%
-    as.numeric()
+  distance <- haversine_distance(
+    long, lat, coords[, 1], coords[, 2]
+  )
+
 
   # check how far away nearest observation is
   min_dist <- min(distance, na.rm = T)
@@ -139,7 +133,7 @@ st_weighted_mean_worker <- function(st,
   df_results <- tibble(
   #  variable = variable,
     value = value,
-  #  sd = sd,
+   # sd = sd,
     lat = lat,
     long = long,
     sigma = sigma

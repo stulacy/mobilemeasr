@@ -2,18 +2,18 @@
 % Please edit documentation in R/st_weighted_linear_regression.R
 \name{st_weighted_linear_regression}
 \alias{st_weighted_linear_regression}
-\title{Function to perform distance-weighted quantile regression}
+\title{Function to perform distance-weighted linear regression}
 \usage{
-st_weighted_linear_regression(st, location, formula, sigma = 250, verbose = T)
+st_weighted_linear_regression(st, location, formula, sigma = 100, verbose = T)
 }
 \arguments{
 \item{st}{Object of class \code{sf} containing the data on which to perform the regression.}
 
 \item{location}{Object of class \code{sf} containing POINT geometries of locations to perform the regression at.}
 
-\item{formula}{A formula specifying the model, as in \code{\link[quantreg]{rq}} and \code{\link[stats]{lm}}.}
+\item{formula}{A formula specifying the model, as in \code{\link[stats]{lm}} and \code{\link[quantreg]{rq}}.}
 
-\item{sigma}{Width of the Gaussian kernel smoothing function.
+\item{sigma}{Width of the Gaussian kernel smoothing function in m.
 Small \eqn{\sigma} leads to a narrow Gaussian and hence allows the user to focus on very localised effects, whereas
 a bigger \eqn{\sigma} has the effect of smoothing things out.}
 
@@ -23,7 +23,7 @@ a bigger \eqn{\sigma} has the effect of smoothing things out.}
 Tibble containing model results.
 }
 \description{
-Function to perform distance-weighted quantile regression
+Function to perform distance-weighted linear regression
 }
 \author{
 Shona Wilde

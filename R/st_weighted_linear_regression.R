@@ -1,12 +1,12 @@
-#' Function to perform distance-weighted quantile regression
+#' Function to perform distance-weighted linear regression
 #'
 #' @param st Object of class \code{sf} containing the data on which to perform the regression.
 #'
 #' @param location Object of class \code{sf} containing POINT geometries of locations to perform the regression at.
 #'
-#' @param formula A formula specifying the model, as in \code{\link[quantreg]{rq}} and \code{\link[stats]{lm}}.
+#' @param formula A formula specifying the model, as in \code{\link[stats]{lm}} and \code{\link[quantreg]{rq}}.
 #'
-#' @param sigma Width of the Gaussian kernel smoothing function.
+#' @param sigma Width of the Gaussian kernel smoothing function in m.
 #' Small \eqn{\sigma} leads to a narrow Gaussian and hence allows the user to focus on very localised effects, whereas
 #'  a bigger \eqn{\sigma} has the effect of smoothing things out.
 #'
@@ -18,10 +18,11 @@
 #'
 #' @export
 
+
 st_weighted_linear_regression <- function(st,
                                           location,
                                           formula,
-                                          sigma = 250,
+                                          sigma = 100,
                                           verbose = T) {
 
   # count models
@@ -67,7 +68,7 @@ st_weighted_linear_regression_worker <- function(st,
   index <- as.numeric(index)
 
 
-  # Display message for every 10th model
+  # display message for every 100th model
   if (verbose && index%%100== 0) {
 
     message(
@@ -81,13 +82,14 @@ st_weighted_linear_regression_worker <- function(st,
   lat <- st_coordinates(location)[2]
   long <- st_coordinates(location)[1]
 
+  # locations in df as matrix
+  coords <- st_coordinates(st)
+
   # calculate distance to each observation
-  distance <- st_distance(
-    location,
-    st,
-    by_element = F
-  ) %>%
-    as.numeric()
+  distance <- haversine_distance(
+    long, lat, coords[, 1], coords[, 2]
+  )
+
 
   # check how far away nearest observation is
   min_dist <- min(distance, na.rm = T)
@@ -103,8 +105,10 @@ st_weighted_linear_regression_worker <- function(st,
   # calculate weights
   weights <- exp(-(abs(distance - 0)) ^ 2/(2 * sigma ^ 2)) / (sigma * sqrt(2 * pi))
 
+  # normalise
   weights_norm <- shonarrr::normalise(weights)
 
+  # add to st
   st$weights <- weights_norm
 
   # filter to only influencing observations to speed calculation up
@@ -129,7 +133,7 @@ st_weighted_linear_regression_worker <- function(st,
       formula = format(formula) %>% paste(collapse = " ") %>% str_squish()
     ) %>%
     select(
-    #  model,
+      #  model,
       lat,
       long,
       term,
@@ -145,6 +149,12 @@ st_weighted_linear_regression_worker <- function(st,
   return(df_results)
 
 }
+
+
+
+
+
+
 
 
 

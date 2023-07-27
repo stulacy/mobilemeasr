@@ -4,7 +4,7 @@
 #'
 #' @param location Object of class \code{sf} containing POINT geometries of locations to perform the regression at.
 #'
-#' @param formula A formula specifying the model, as in \code{\link[quantreg]{rq}} and \code{\link[stats]{lm}}.
+#' @param formula A formula specifying the model, as in \code{\link[stats]{lm}} and \code{\link[quantreg]{rq}}.
 #'
 #' @param tau The quantile(s) to be estimated. Generally a number between 0 and 1.
 #'
@@ -87,24 +87,17 @@ st_weighted_quantile_regression_worker <- function(st,
   }
 
 
-  # format geometry column
-  df_geometry <- location %>%
-    st_as_sf() %>%
-    sfc_to_columns(drop_geometry = T)
+  # store lat and lon
+  lat <- st_coordinates(location)[2]
+  long <- st_coordinates(location)[1]
 
-  lat <- df_geometry %>%
-    pull(lat)
-
-  long <- df_geometry %>%
-    pull(long)
+  # locations in df as matrix
+  coords <- st_coordinates(st)
 
   # calculate distance to each observation
-  distance <- st_distance(
-    location,
-    st,
-    by_element = F
-  ) %>%
-    as.numeric()
+  distance <- haversine_distance(
+    long, lat, coords[, 1], coords[, 2]
+  )
 
   # check how far away nearest observation is
   min_dist <- min(distance, na.rm = T)
@@ -217,7 +210,7 @@ st_weighted_quantile_regression_worker <- function(st,
     )
     },
     error = function(e) {
-      print(e)
+     # print(e)
       return(tibble())
 
     }
