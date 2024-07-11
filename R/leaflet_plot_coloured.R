@@ -1,6 +1,6 @@
 #' Function to plot coloured geometries on a leaflet map
 #'
-#' This function is a wrapper around \code{\link[gissr]{leaflet_plot}} that allows geometries to be coloured according to a variable.
+#' This function is a wrapper around \code{\link[sspatialr]{plot_sf_leaflet}} that allows geometries to be coloured according to a variable.
 #' Discrete and continuous scales are supported.
 #'
 #' @param st Object with class \code{sf} or \code{sfc}.
@@ -9,13 +9,9 @@
 #'
 #' @param palette Colours that values will be mapped to.
 #'
-#' @param popup Vector of variables to be used as a pop-up on the map.
+#' @param popup Should interactive popups be included in the map if possible? 
 #'
-#' @param opacity Stroke opacity (edge of geometry).
-#'
-#' @param fill_opacity Fill opacity (inside of geometry).
-#'
-#' @return Leaflet map.
+#' @return Leaflet map/plot.
 #'
 #' @author Shona Wilde
 #'
@@ -23,43 +19,41 @@
 #'
 #' @export
 
-leaflet_plot_coloured <- function(st, colour_by = "value", palette = "plasma", popup = NULL, opacity = 0.5, fill_opacity = 0.2) {
-
-
+leaflet_plot_coloured <- function(st, colour_by = "value", palette = "plasma", popup = T) {
+  
+  # define variables to colour by
   colour_var <- sym(colour_by)
-
+  
   domain <- st %>%
     pull(!!colour_var)
-
-
-  # set palette  based on continuous or discrete variables
+  
+  
+  # set palette based on continuous or discrete variables
   if (class(domain) %in% c("integer", "numeric"))
-
+    
   {
     pal <- leaflet::colorNumeric(
       palette = palette,
       domain = domain
     )
-
+    
   }
-
+  
   else {
-
+    
     pal <- leaflet::colorFactor(
       palette = palette,
       domain = domain,
-      na.color = "black"
+      na.color = "gray50"
     )
-
+    
   }
-
+  
   # build plot with legend
-  plot <- gissr::leaflet_plot(
+  plot <- plot_sf_leaflet(
     st,
-    fill_opacity = fill_opacity,
     colour = ~pal(domain),
-    popup = popup,
-    opacity = opacity
+    popup = popup
   )  %>%
     leaflet::addLegend(
       "bottomright",
@@ -68,12 +62,8 @@ leaflet_plot_coloured <- function(st, colour_by = "value", palette = "plasma", p
       title = colour_by,
       opacity = 1
     )
-
-
+  
+  
   return(plot)
-
+  
 }
-
-
-
-

@@ -4,14 +4,7 @@
 \alias{leaflet_plot_coloured}
 \title{Function to plot coloured geometries on a leaflet map}
 \usage{
-leaflet_plot_coloured(
-  st,
-  colour_by = "value",
-  palette = "plasma",
-  popup = NULL,
-  opacity = 0.5,
-  fill_opacity = 0.2
-)
+leaflet_plot_coloured(st, colour_by = "value", palette = "plasma", popup = T)
 }
 \arguments{
 \item{st}{Object with class \code{sf} or \code{sfc}.}
@@ -20,17 +13,13 @@ leaflet_plot_coloured(
 
 \item{palette}{Colours that values will be mapped to.}
 
-\item{popup}{Vector of variables to be used as a pop-up on the map.}
-
-\item{opacity}{Stroke opacity (edge of geometry).}
-
-\item{fill_opacity}{Fill opacity (inside of geometry).}
+\item{popup}{Should interactive popups be included in the map if possible?}
 }
 \value{
-Leaflet map.
+Leaflet map/plot.
 }
 \description{
-This function is a wrapper around \code{\link[gissr]{leaflet_plot}} that allows geometries to be coloured according to a variable.
+This function is a wrapper around \code{\link[sspatialr]{plot_sf_leaflet}} that allows geometries to be coloured according to a variable.
 Discrete and continuous scales are supported.
 }
 \seealso{
