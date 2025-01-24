@@ -30,7 +30,14 @@ Imports:
     lmodel2,
     tidygraph,
     janitor,
+<<<<<<< Updated upstream
     sspatialr,
+=======
+<<<<<<< HEAD
+=======
+    sspatialr,
+>>>>>>> 81d73c31c1ad0e2aa20595e67563be9998c60833
+>>>>>>> Stashed changes
     shonarrr (>= 0.0.2)
 Remotes:
     github::shonawilde/shonarrr,
